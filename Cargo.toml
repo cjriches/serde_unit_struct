@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "serde_unit_struct",
+    "serde_unit_struct_derive",
+]
