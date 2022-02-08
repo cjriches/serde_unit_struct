@@ -1,3 +1,6 @@
+/// Copyright (c) 2022 Chris Riches
+/// Licensed under MIT or Apache 2.0
+///
 /// (De)serialize a unit struct as its name.
 /// ```
 /// use serde_unit_struct::{Deserialize_unit_struct, Serialize_unit_struct};

@@ -1,7 +1,13 @@
 [package]
 name = "serde_unit_struct_derive"
 version = "0.1.0"
+authors = ["Chris Riches"]
 edition = "2021"
+description = "Proc-macro engine for serde_unit_struct"
+readme = "../README.md"
+repository = "https://github.com/cjriches/serde_unit_struct"
+license = "MIT OR Apache-2.0"
+categories = ["encoding"]
 
 [lib]
 proc-macro = true

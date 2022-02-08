@@ -1,3 +1,5 @@
+/// Copyright (c) 2022 Chris Riches
+/// Licensed under MIT or Apache 2.0
 use proc_macro::{Span, TokenStream};
 use quote::quote;
 use syn::{parse_macro_input, DeriveInput, LitStr};
