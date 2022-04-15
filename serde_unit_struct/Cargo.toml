@@ -1,6 +1,6 @@
 [package]
 name = "serde_unit_struct"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Chris Riches"]
 edition = "2021"
 description = "(De)serialize a unit struct as its name"
@@ -11,7 +11,7 @@ categories = ["encoding"]
 
 [dependencies.serde_unit_struct_derive]
 path = "../serde_unit_struct_derive"
-version = "0.1.0"
+version = "0.1.1"
 
 [dev-dependencies]
 serde = "1.0"
