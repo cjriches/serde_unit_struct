@@ -1,6 +1,6 @@
 [package]
 name = "serde_unit_struct_derive"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Chris Riches"]
 edition = "2021"
 description = "Proc-macro engine for serde_unit_struct"

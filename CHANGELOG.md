@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v0.1.2
 * Made the crate `no_std`-compatible.
 
 ## v0.1.1
