@@ -43,9 +43,9 @@ pub fn deserialize_derive(input: TokenStream) -> TokenStream {
     let deserialize_impl = quote! {
         impl<'de> serde::Deserialize<'de> for #name {
             fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-                <String as serde::Deserialize>::deserialize(deserializer)
+                <&str as serde::Deserialize>::deserialize(deserializer)
                     .and_then(|s| {
-                        if &s == #name_str {
+                        if s == #name_str {
                             Ok(Self)
                         } else {
                             Err(serde::de::Error::custom(#error_msg))

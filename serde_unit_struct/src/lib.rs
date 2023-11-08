@@ -9,6 +9,8 @@
 //! struct Foo;
 //! ```
 
+#![no_std]
+
 pub use serde_unit_struct_derive::{Deserialize_unit_struct, Serialize_unit_struct};
 
 #[cfg(test)]
