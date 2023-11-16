@@ -41,16 +41,29 @@ pub fn deserialize_derive(input: TokenStream) -> TokenStream {
 
     // Construct the impl block.
     let deserialize_impl = quote! {
+        struct UnitStructVisitor;
+
+        impl<'de> serde::de::Visitor<'de> for UnitStructVisitor {
+            type Value = #name;
+
+            fn expecting(&self, fmt: &mut core::fmt::Formatter) -> core::fmt::Result {
+                fmt.write_str(#error_msg)
+            }
+
+            fn visit_str<E: serde::de::Error>(self, value: &str) -> Result<Self::Value, E> {
+                if value == #name_str {
+                    Ok(#name)
+                } else {
+                    Err(E::custom(#error_msg))
+                }
+            }
+        }
+
         impl<'de> serde::Deserialize<'de> for #name {
-            fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-                <&str as serde::Deserialize>::deserialize(deserializer)
-                    .and_then(|s| {
-                        if s == #name_str {
-                            Ok(Self)
-                        } else {
-                            Err(serde::de::Error::custom(#error_msg))
-                        }
-                    })
+            fn deserialize<D: serde::Deserializer<'de>>(
+                deserializer: D
+            ) -> Result<Self, D::Error> {
+                deserializer.deserialize_str(UnitStructVisitor)
             }
         }
     };
