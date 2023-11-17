@@ -3,6 +3,7 @@
 ## Unreleased
 * Fixed the issue in `v0.1.2`; the crate now works with all `Deserializer`s
   while still being no-std compatible.
+* Updated dependency syn from 1.0 to 2.0
 
 
 ## v0.1.2 (YANKED)
