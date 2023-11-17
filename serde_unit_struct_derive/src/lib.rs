@@ -3,7 +3,7 @@
 
 use proc_macro::{Span, TokenStream};
 use quote::quote;
-use syn::{parse_macro_input, DeriveInput, LitStr};
+use syn::{parse_macro_input, DeriveInput, Ident, LitStr};
 
 /// Automatically derive Serialize for the given unit struct.
 #[proc_macro_derive(Serialize_unit_struct)]
@@ -39,18 +39,36 @@ pub fn deserialize_derive(input: TokenStream) -> TokenStream {
         Span::call_site().into(),
     );
 
+    // We have to squirt a new Visitor struct into scope; pick a name that definitely
+    // won't collide with anything.
+    let visitor = Ident::new(
+        &format!("SerdeUnitStructDerive{}Visitor", name),
+        Span::call_site().into(),
+    );
+
     // Construct the impl block.
     let deserialize_impl = quote! {
+        struct #visitor;
+
+        impl<'de> serde::de::Visitor<'de> for #visitor {
+            type Value = #name;
+
+            fn expecting(&self, fmt: &mut core::fmt::Formatter) -> core::fmt::Result {
+                fmt.write_str(#error_msg)
+            }
+
+            fn visit_str<E: serde::de::Error>(self, value: &str) -> Result<Self::Value, E> {
+                if value == #name_str {
+                    Ok(#name)
+                } else {
+                    Err(E::custom(#error_msg))
+                }
+            }
+        }
+
         impl<'de> serde::Deserialize<'de> for #name {
             fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
-                <&str as serde::Deserialize>::deserialize(deserializer)
-                    .and_then(|s| {
-                        if s == #name_str {
-                            Ok(Self)
-                        } else {
-                            Err(serde::de::Error::custom(#error_msg))
-                        }
-                    })
+                deserializer.deserialize_str(#visitor)
             }
         }
     };
