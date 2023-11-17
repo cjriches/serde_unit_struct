@@ -49,7 +49,7 @@ fn main() {
     assert_eq!(foo, Foo);
 
     // Type information is maintained.
-    let bar: Bar = serde_json::from_str(&json);
+    let bar: Result<Bar, _> = serde_json::from_str(&json);
     assert!(bar.is_err());
 }
 ```
