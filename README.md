@@ -1,5 +1,7 @@
 Serde Unit Struct Derive
 ========================
+[<img alt="crates.io" src="https://img.shields.io/crates/v/serde_unit_struct?logo=rust">](https://crates.io/crates/serde_unit_struct)
+[<img alt="docs.rs" src="https://img.shields.io/docsrs/serde_unit_struct?logo=docs.rs&label=docs.rs">](https://docs.rs/serde_unit_struct)
 
 This crate provides derive macros for Serde's `Serialize` and `Deserialize` traits on unit structs, such that the unit struct is represented by its name as a string.
 This is useful if you wish to maintain type information, i.e. differentiate between different unit structs.
