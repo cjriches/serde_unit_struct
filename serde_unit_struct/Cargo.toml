@@ -1,6 +1,6 @@
 [package]
 name = "serde_unit_struct"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Chris Riches"]
 edition = "2021"
 description = "(De)serialize a unit struct as its name"
@@ -11,7 +11,7 @@ categories = ["encoding", "no-std::no-alloc"]
 
 [dependencies.serde_unit_struct_derive]
 path = "../serde_unit_struct_derive"
-version = "0.1.2"
+version = "0.1.3"
 
 [dev-dependencies]
 bson = "2"
